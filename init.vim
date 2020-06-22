@@ -5,6 +5,8 @@ set wrap
 set linebreak
 set ruler
 set nobackup
+set splitright
+set splitbelow
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -14,9 +16,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'KeitaNakamura/neodark.vim'
 Plug 'Yggdroot/indentLine'
-"Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'mhinz/vim-startify'
 call plug#end()
+
+autocmd FileType json,markdown let g:indentLine_conceallevel=0
+autocmd FileType javascript,python,c,cpp,java,vim,shell let g:indentLine_conceallevel=2
 
 "python
 let g:python3_host_prog = '/usr/local/bin/python3'
@@ -24,10 +29,16 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 "设置leader键
 let mapleader=" "
 
+"terminal底部打开
+noremap <LEADER>vt :split \| terminal 
+
 "主题颜色
 colorscheme neodark
 let g:neodark#use_256color = 1
 let g:neodark#background = '#000000'
+
+"cd进当前文件目录
+nmap <LEADER>cn :cd %:p:h<CR>
 
 "格式化Json
 noremap <LEADER>fj :%!python -m json.tool<CR>
